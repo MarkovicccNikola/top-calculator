@@ -1,42 +1,62 @@
 const resultLabel = document.querySelector("label");
+const numbers = document.querySelectorAll(".number");
+const operatorsContainer = document.querySelector("#operations-container");
+const operators = operatorsContainer.children;
 
-function add(num1, num2) {
-  return (result = Number(num1) + Number(num2));
-}
-
-function subtract(num1, num2) {
-  return (result = num1 - num2);
-}
-
-function multiply(num1, num2) {
-  return (result = num1 * num2);
-}
-
-function divide(num1, num2) {
-  return (result = num1 / num2);
-}
+let operation = null;
+let isSet = false;
+let value1 = null;
+let value2 = null;
 
 function operate() {
-  operation = prompt("Enter operation");
-  num1 = prompt("Enter First number");
-  num2 = prompt("Enter Second number");
-
   switch (operation) {
     case "+":
-      add(num1, num2);
-      console.log(result);
-      break;
+      value1 = value1 + value2;
+      return value1, (value2 = null);
     case "-":
-      subtract(num1, num2);
-      console.log(result);
+      subtract(value1, value2);
       break;
     case "*":
-      multiply(num1, num2);
-      console.log(result);
+      multiply(value1, value2);
       break;
     case "/":
-      divide(num1, num2);
-      console.log(result);
+      divide(value1, value2);
       break;
   }
 }
+
+for (i of numbers) {
+  i.addEventListener("click", function () {
+    if (isSet === false) {
+      resultLabel.innerHTML += this.innerHTML;
+    } else {
+      resultLabel.innerHTML += this.innerHTML;
+    }
+  });
+}
+
+for (i of operators) {
+  i.addEventListener("click", function () {
+    if (isSet === false) {
+      isSet = true;
+      operation = this.innerHTML;
+      value1 = Number(resultLabel.innerHTML);
+      resultLabel.innerHTML = "";
+    } else if (isSet === true) {
+      value2 = Number(resultLabel.innerHTML);
+      operate();
+      resultLabel.innerHTML = value1;
+      isSet = false;
+    }
+  });
+}
+
+/*Clear the currentInput after clicking any operator button.
+Once that is cleared add operator on the screen. Clear the screen completely
+when the next number is inputted.
+*/
+
+/*I can make an array and then loop through that array. 
+And then depending on what the next item is I perform the operation on the previous thing?
+This would make sense.
+*/
