@@ -47,7 +47,7 @@ function getValue() {
 }
 
 function printNew() {
-  resultLabel.innerHTML = value1;
+  resultLabel.innerHTML = Math.round((value1 + Number.EPSILON) * 100) / 100;
 }
 
 for (i of numbers) {
