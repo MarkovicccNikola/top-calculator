@@ -1,3 +1,5 @@
+const resultLabel = document.querySelector("label");
+
 function add(num1, num2) {
   return (result = Number(num1) + Number(num2));
 }
@@ -38,5 +40,3 @@ function operate() {
       break;
   }
 }
-
-operate();
